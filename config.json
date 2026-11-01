@@ -1,1 +1,7 @@
-
+{
+  "appName": "CoolAssist",
+  "version": "1.0.0",
+  "searchEngine": "https://www.google.com/search?q=",
+  "aiChatLink": "https://chat.openai.com/",
+  "note": "يمكنك تغيير aiChatLink إلى رابط Gemini أو Bing لاحقاً"
+}
