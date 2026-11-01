@@ -19,7 +19,9 @@ export default async function handler(req, res) {
 
     // قراءة المفتاح من إعدادات Vercel السرية
     const API_KEY = process.env.GEMINI_API_KEY;
-    const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
+    
+    // 🔴 هنا قمنا بتغيير النموذج إلى gemini-3.8-flash
+    const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key=${API_KEY}`;
 
     const prompt = `أنت خبير تقني محترف في صيانة التكييف والتبريد (HVAC). أجب على سؤال الفني التالي باللغة العربية بأسلوب عملي ومباشر، واذكر الأسباب وخطوات الفحص: "${question}"`;
 
@@ -37,6 +39,8 @@ export default async function handler(req, res) {
         if (data.candidates && data.candidates[0].content.parts[0].text) {
             res.status(200).json({ answer: data.candidates[0].content.parts[0].text });
         } else {
+            // إذا كان اسم النموذج خاطئاً، سيظهر الخطأ هنا في سجلات Vercel
+            console.log("API Error Response:", data); 
             res.status(500).json({ error: 'Failed to get response from AI' });
         }
     } catch (error) {
