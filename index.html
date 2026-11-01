@@ -5,98 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CoolAssist | مساعد الفني</title>
     <style>
-        :root {
-            --bg-color: #0f172a;
-            --card-bg: #1e293b;
-            --primary: #38bdf8;
-            --text: #f8fafc;
-        }
-        body { 
-            font-family: 'Segoe UI', Tahoma, sans-serif; 
-            background-color: var(--bg-color); 
-            color: var(--text); 
-            margin: 0; 
-            padding: 20px; 
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        .header h1 {
-            color: var(--primary);
-            font-size: 2.5em;
-            margin: 0;
-            text-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
-        }
-        .header p {
-            color: #94a3b8;
-            margin-top: 5px;
-        }
-        .main-card {
-            background-color: var(--card-bg);
-            padding: 25px;
-            border-radius: 15px;
-            width: 100%;
-            max-width: 500px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-        }
-        textarea {
-            width: 100%;
-            height: 100px;
-            background-color: #0f172a;
-            border: 1px solid #334155;
-            border-radius: 10px;
-            padding: 15px;
-            color: white;
-            font-size: 16px;
-            resize: none;
-            box-sizing: border-box;
-            margin-bottom: 15px;
-            font-family: inherit;
-        }
-        textarea:focus {
-            outline: none;
-            border-color: var(--primary);
-        }
-        .btn-main {
-            width: 100%;
-            padding: 15px;
-            background-color: var(--primary);
-            color: #0f172a;
-            border: none;
-            border-radius: 10px;
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        .btn-main:hover {
-            background-color: #7dd3fc;
-        }
-        .quick-links {
-            margin-top: 20px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            width: 100%;
-            max-width: 500px;
-        }
-        .quick-links button {
-            padding: 12px;
-            background-color: #1e293b;
-            color: #cbd5e1;
-            border: 1px solid #334155;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 14px;
-        }
-        .quick-links button:hover {
-            background-color: #334155;
-            color: white;
-        }
+        :root { --bg-color: #0f172a; --card-bg: #1e293b; --primary: #38bdf8; --text: #f8fafc; }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: var(--bg-color); color: var(--text); margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; }
+        .header { text-align: center; margin-bottom: 20px; }
+        .header h1 { color: var(--primary); font-size: 2.5em; margin: 0; text-shadow: 0 0 10px rgba(56, 189, 248, 0.3); }
+        .header p { color: #94a3b8; margin-top: 5px; }
+        
+        .card { background-color: var(--card-bg); padding: 20px; border-radius: 15px; width: 100%; max-width: 500px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); margin-bottom: 20px; }
+        .card h2 { color: var(--primary); font-size: 1.2em; margin-top: 0; border-bottom: 1px solid #334155; padding-bottom: 10px; }
+        
+        textarea { width: 100%; height: 80px; background-color: #0f172a; border: 1px solid #334155; border-radius: 10px; padding: 15px; color: white; font-size: 16px; resize: none; box-sizing: border-box; margin-bottom: 15px; }
+        .btn-main { width: 100%; padding: 15px; background-color: var(--primary); color: #0f172a; border: none; border-radius: 10px; font-size: 18px; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        
+        /* تصميم أكواد الأعطال */
+        .code-input { width: 100%; padding: 12px; background-color: #0f172a; border: 1px solid #334155; border-radius: 10px; color: white; font-size: 16px; box-sizing: border-box; margin-bottom: 10px; text-align: center; text-transform: uppercase; font-weight: bold; }
+        .code-result { background-color: #0f172a; border-right: 4px solid #f59e0b; padding: 15px; border-radius: 8px; display: none; }
+        .code-result h3 { margin: 0 0 10px 0; color: #f59e0b; }
+        .code-result p { margin: 0; color: #cbd5e1; line-height: 1.5; font-size: 14px; }
+        .quick-codes { display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap; justify-content: center; }
+        .quick-codes button { padding: 8px 15px; background-color: #334155; color: white; border: none; border-radius: 20px; cursor: pointer; font-weight: bold; }
+        .quick-codes button:hover { background-color: var(--primary); color: #0f172a; }
     </style>
 </head>
 <body>
@@ -106,47 +34,74 @@
         <p>مساعدك الذكي في صيانة التكييف والتبريد</p>
     </div>
 
-    <div class="main-card">
-        <textarea id="question" placeholder="اكتب كود العطل (مثل E5) أو اشرح المشكلة بالتفصيل..."></textarea>
-        <button class="btn-main" onclick="askAI('gemini')">🤖 اسأل الذكاء الاصطناعي (Gemini)</button>
+    <!-- قسم الذكاء الاصطناعي -->
+    <div class="card">
+        <h2>🤖 اسأل الذكاء الاصطناعي</h2>
+        <textarea id="question" placeholder="اكتب كود العطل (مثل E5) أو اشرح المشكلة..."></textarea>
+        <button class="btn-main" onclick="openAI()">اسأل عبر Gemini</button>
     </div>
 
-    <div class="quick-links">
-        <button onclick="askAI('chatgpt')">💬 اسأل ChatGPT</button>
-        <button onclick="searchGoogle()">🔍 ابحث في جوجل</button>
+    <!-- قسم أكواد الأعطال (يعمل بدون إنترنت) -->
+    <div class="card">
+        <h2>🔍 بحث سريع في أكواد الأعطال</h2>
+        <input type="text" id="errorCodeInput" class="code-input" placeholder="اكتب الكود هنا (مثال: E5)">
+        <div id="errorResult" class="code-result">
+            <h3 id="resCode"></h3>
+            <p id="resDesc"></p>
+        </div>
+        
+        <!-- أزرار سريعة -->
+        <div class="quick-codes">
+            <button onclick="showCode('E1')">E1</button>
+            <button onclick="showCode('E5')">E5</button>
+            <button onclick="showCode('F3')">F3</button>
+            <button onclick="showCode('H6')">H6</button>
+        </div>
     </div>
 
     <script>
-        function askAI(engine) {
-            const q = document.getElementById('question').value.trim();
-            
-            if (!q) {
-                alert("الرجاء كتابة سؤال أو كود العطل أولاً!");
-                return;
-            }
+        // 1. قاعدة بيانات أكواد الأعطال (يمكنك إضافة المزيد هنا)
+        const errorDatabase = {
+            "E1": "عطل في حساس الحرارة الداخلي (Room Temp Sensor). تأكد من توصيل السلك أو استبدل الحساس.",
+            "E5": "عطل في كارت الإنفرتر (IPM Module). يرجى فحص مكثفات الكارت أو تغييره.",
+            "F3": "عطل في مروحة الوحدة الخارجية. تأكد من عدم وجود عائق، أو فحص المكثف (Capacitor).",
+            "H6": "عطل في تشغيل الموتور الداخلي (Indoor Fan Motor). تأكد من الفيش أو استبدال الموتور.",
+            "P4": "عطل في حساس حرارة الأنسياب (Pipe Temp)."
+        };
 
-            let url = "";
-            if (engine === 'gemini') {
-                // فتح جيميني مع السؤال
-                url = "https://gemini.google.com/app?q=" + encodeURIComponent(q);
-            } else if (engine === 'chatgpt') {
-                // فتح شات جي بي تي مع السؤال (ملاحظة: ChatGPT قد يطلب تسجيل دخول)
-                url = "https://chatgpt.com/?q=" + encodeURIComponent(q);
-            }
+        // 2. دالة البحث عن الكود
+        const codeInput = document.getElementById('errorCodeInput');
+        codeInput.addEventListener('input', function() {
+            const val = this.value.trim().toUpperCase();
+            const resultBox = document.getElementById('errorResult');
+            const resCode = document.getElementById('resCode');
+            const resDesc = document.getElementById('resDesc');
 
-            // فتح الرابط في نافذة جديدة
-            window.open(url, '_blank');
+            if (errorDatabase[val]) {
+                resultBox.style.display = 'block';
+                resCode.innerText = "كود: " + val;
+                resDesc.innerText = errorDatabase[val];
+            } else {
+                resultBox.style.display = 'none';
+            }
+        });
+
+        // 3. دالة الأزرار السريعة
+        function showCode(code) {
+            codeInput.value = code;
+            const event = new Event('input');
+            codeInput.dispatchEvent(event);
         }
 
-        function searchGoogle() {
+        // 4. دالة الذكاء الاصطناعي
+        function openAI() {
             const q = document.getElementById('question').value.trim();
-            if (!q) {
-                alert("الرجاء كتابة ما تريد البحث عنه!");
-                return;
+            if (q !== "") {
+                window.open(`https://gemini.google.com/app?q=${encodeURIComponent(q)}`, '_blank');
+            } else {
+                window.open("https://gemini.google.com", '_blank');
             }
-            window.open("https://www.google.com/search?q=" + encodeURIComponent(q), '_blank');
         }
     </script>
-
 </body>
 </html>
