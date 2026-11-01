@@ -3,41 +3,150 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CoolAssist - مساعد الفني الذكي</title>
+    <title>CoolAssist | مساعد الفني</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #0b1a2a; color: white; margin: 0; padding: 20px; text-align: center; }
-        h1 { color: #4fc3f7; margin-bottom: 5px; }
-        p { color: #a0c4df; }
-        .search-box { margin: 20px auto; max-width: 600px; display: flex; flex-direction: column; gap: 10px; }
-        textarea { width: 100%; padding: 15px; border-radius: 8px; border: none; font-size: 16px; height: 80px; resize: none; box-sizing: border-box; }
-        button { padding: 15px; background-color: #4fc3f7; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; color: #0b1a2a; font-size: 16px; }
-        button:hover { background-color: #81d4fa; }
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --primary: #38bdf8;
+            --text: #f8fafc;
+        }
+        body { 
+            font-family: 'Segoe UI', Tahoma, sans-serif; 
+            background-color: var(--bg-color); 
+            color: var(--text); 
+            margin: 0; 
+            padding: 20px; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            color: var(--primary);
+            font-size: 2.5em;
+            margin: 0;
+            text-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+        }
+        .header p {
+            color: #94a3b8;
+            margin-top: 5px;
+        }
+        .main-card {
+            background-color: var(--card-bg);
+            padding: 25px;
+            border-radius: 15px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+        textarea {
+            width: 100%;
+            height: 100px;
+            background-color: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 10px;
+            padding: 15px;
+            color: white;
+            font-size: 16px;
+            resize: none;
+            box-sizing: border-box;
+            margin-bottom: 15px;
+            font-family: inherit;
+        }
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        .btn-main {
+            width: 100%;
+            padding: 15px;
+            background-color: var(--primary);
+            color: #0f172a;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn-main:hover {
+            background-color: #7dd3fc;
+        }
+        .quick-links {
+            margin-top: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            width: 100%;
+            max-width: 500px;
+        }
+        .quick-links button {
+            padding: 12px;
+            background-color: #1e293b;
+            color: #cbd5e1;
+            border: 1px solid #334155;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .quick-links button:hover {
+            background-color: #334155;
+            color: white;
+        }
     </style>
 </head>
 <body>
-    <h1>CoolAssist</h1>
-    <p>مساعدك الذكي في عالم التكييف والتبريد</p>
 
-    <!-- حقل السؤال -->
-    <div class="search-box">
-        <textarea id="userQuestion" placeholder="اكتب سؤالك هنا (مثلاً: كود E5 في مكيف سبليت)..."></textarea>
-        <button onclick="openAI()">اسأل الذكاء الاصطناعي</button>
+    <div class="header">
+        <h1>CoolAssist</h1>
+        <p>مساعدك الذكي في صيانة التكييف والتبريد</p>
+    </div>
+
+    <div class="main-card">
+        <textarea id="question" placeholder="اكتب كود العطل (مثل E5) أو اشرح المشكلة بالتفصيل..."></textarea>
+        <button class="btn-main" onclick="askAI('gemini')">🤖 اسأل الذكاء الاصطناعي (Gemini)</button>
+    </div>
+
+    <div class="quick-links">
+        <button onclick="askAI('chatgpt')">💬 اسأل ChatGPT</button>
+        <button onclick="searchGoogle()">🔍 ابحث في جوجل</button>
     </div>
 
     <script>
-        function openAI() {
-            const question = document.getElementById('userQuestion').value;
+        function askAI(engine) {
+            const q = document.getElementById('question').value.trim();
             
-            // إذا كتب سؤالاً، نأخذه معنا إلى جوجل جيميني، وإلا نفتح الصفحة الرئيسية
-            if (question.trim() !== "") {
-                // نجهز الرابط ليفتح Gemini مع السؤال
-                const geminiUrl = `https://gemini.google.com/app?q=${encodeURIComponent(question)}`;
-                window.open(geminiUrl, '_blank');
-            } else {
-                // إذا لم يكتب شيئاً، نفتح صفحة Gemini العادية
-                window.open("https://gemini.google.com", '_blank');
+            if (!q) {
+                alert("الرجاء كتابة سؤال أو كود العطل أولاً!");
+                return;
             }
+
+            let url = "";
+            if (engine === 'gemini') {
+                // فتح جيميني مع السؤال
+                url = "https://gemini.google.com/app?q=" + encodeURIComponent(q);
+            } else if (engine === 'chatgpt') {
+                // فتح شات جي بي تي مع السؤال (ملاحظة: ChatGPT قد يطلب تسجيل دخول)
+                url = "https://chatgpt.com/?q=" + encodeURIComponent(q);
+            }
+
+            // فتح الرابط في نافذة جديدة
+            window.open(url, '_blank');
+        }
+
+        function searchGoogle() {
+            const q = document.getElementById('question').value.trim();
+            if (!q) {
+                alert("الرجاء كتابة ما تريد البحث عنه!");
+                return;
+            }
+            window.open("https://www.google.com/search?q=" + encodeURIComponent(q), '_blank');
         }
     </script>
+
 </body>
 </html>
