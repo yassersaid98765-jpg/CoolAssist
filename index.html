@@ -1,1 +1,55 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoolAssist - مساعد الفني الذكي</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #0b1a2a; color: white; margin: 0; padding: 20px; text-align: center; }
+        h1 { color: #4fc3f7; }
+        .search-box { margin: 20px auto; max-width: 500px; display: flex; }
+        input { flex: 1; padding: 15px; border-radius: 8px 0 0 8px; border: none; font-size: 16px; }
+        button { padding: 15px 25px; background-color: #4fc3f7; border: none; border-radius: 0 8px 8px 0; font-weight: bold; cursor: pointer; color: #0b1a2a; }
+        .quick-links { margin-top: 30px; display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
+        .quick-links a { background-color: #1e3a5f; color: white; padding: 10px 20px; border-radius: 20px; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <h1>CoolAssist</h1>
+    <p>مساعدك الذكي في عالم التكييف والتبريد</p>
 
+    <!-- حقل البحث -->
+    <div class="search-box">
+        <input type="text" id="searchInput" placeholder="اكتب كود العطل أو سؤالك هنا...">
+        <button onclick="performSearch()">بحث</button>
+    </div>
+
+    <!-- أزرار سريعة للذكاء الاصطناعي -->
+    <div class="quick-links">
+        <a href="#" onclick="openAI()">اسأل الذكاء الاصطناعي</a>
+        <a href="#" onclick="openLink('https://www.google.com/search?q=HVAC+inverter+error+code')">بحث في جوجل</a>
+    </div>
+
+    <script>
+        // قراءة الإعدادات من ملف config.json (لجعل التطبيق قابلاً للتحديث)
+        let config = { aiChatLink: "https://chat.openai.com/", searchEngine: "https://www.google.com/search?q=" };
+
+        fetch('config.json')
+            .then(response => response.json())
+            .then(data => { config = data; })
+            .catch(error => console.log('Using default config'));
+
+        function performSearch() {
+            const query = document.getElementById('searchInput').value;
+            if(query) {
+                window.open(config.searchEngine + encodeURIComponent(query), '_blank');
+            }
+        }
+
+        function openAI() {
+            // هنا يمكنك لاحقاً إضافة سؤال الفني كطلب بحث للذكاء الاصطناعي
+            window.open(config.aiChatLink, '_blank');
+        }
+    </script>
+</body>
+</html>
