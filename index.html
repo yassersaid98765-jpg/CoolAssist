@@ -6,111 +6,119 @@
     <title>CoolAssist | مساعد الفني</title>
     <style>
         :root { --bg-color: #0f172a; --card-bg: #1e293b; --primary: #38bdf8; --text: #f8fafc; }
-        body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: var(--bg-color); color: var(--text); margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; }
-        .header { text-align: center; margin-bottom: 20px; }
-        .header h1 { color: var(--primary); font-size: 2.5em; margin: 0; text-shadow: 0 0 10px rgba(56, 189, 248, 0.3); }
-        .header p { color: #94a3b8; margin-top: 5px; }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: var(--bg-color); color: var(--text); margin: 0; padding: 15px; display: flex; flex-direction: column; align-items: center; }
+        .header { text-align: center; margin-bottom: 15px; }
+        .header h1 { color: var(--primary); font-size: 2em; margin: 0; text-shadow: 0 0 10px rgba(56, 189, 248, 0.3); }
         
-        .card { background-color: var(--card-bg); padding: 20px; border-radius: 15px; width: 100%; max-width: 500px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); margin-bottom: 20px; }
-        .card h2 { color: var(--primary); font-size: 1.2em; margin-top: 0; border-bottom: 1px solid #334155; padding-bottom: 10px; }
+        .card { background-color: var(--card-bg); padding: 15px; border-radius: 12px; width: 100%; max-width: 500px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); margin-bottom: 15px; box-sizing: border-box; }
+        .card h2 { color: var(--primary); font-size: 1.1em; margin-top: 0; border-bottom: 1px solid #334155; padding-bottom: 8px; display: flex; align-items: center; gap: 8px;}
         
-        textarea { width: 100%; height: 80px; background-color: #0f172a; border: 1px solid #334155; border-radius: 10px; padding: 15px; color: white; font-size: 16px; resize: none; box-sizing: border-box; margin-bottom: 15px; }
-        .btn-main { width: 100%; padding: 15px; background-color: var(--primary); color: #0f172a; border: none; border-radius: 10px; font-size: 18px; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        textarea { width: 100%; height: 60px; background-color: #0f172a; border: 1px solid #334155; border-radius: 8px; padding: 10px; color: white; font-size: 14px; resize: none; box-sizing: border-box; margin-bottom: 10px; }
+        .btn-main { width: 100%; padding: 12px; background-color: var(--primary); color: #0f172a; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; transition: 0.3s; }
         
-        /* تصميم أكواد الأعطال */
-        .code-input { width: 100%; padding: 12px; background-color: #0f172a; border: 1px solid #334155; border-radius: 10px; color: white; font-size: 16px; box-sizing: border-box; margin-bottom: 10px; text-align: center; text-transform: uppercase; font-weight: bold; }
-        .code-result-card { background-color: #0f172a; border-right: 4px solid #f59e0b; padding: 15px; border-radius: 8px; margin-bottom: 10px; display: none; }
-        .code-result-card h3 { margin: 0 0 5px 0; color: #f59e0b; font-size: 16px; }
-        .code-result-card p { margin: 0; color: #cbd5e1; line-height: 1.5; font-size: 14px; }
+        /* تصميم البحث */
+        .code-input { width: 100%; padding: 12px; background-color: #0f172a; border: 2px solid #38bdf8; border-radius: 8px; color: white; font-size: 16px; box-sizing: border-box; margin-bottom: 10px; text-align: center; text-transform: uppercase; font-weight: bold; }
         
-        .quick-codes { display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap; justify-content: center; }
-        .quick-codes button { padding: 8px 15px; background-color: #334155; color: white; border: none; border-radius: 20px; cursor: pointer; font-weight: bold; }
-        .quick-codes button:hover { background-color: var(--primary); color: #0f172a; }
+        /* تصميم كارت النتيجة */
+        .result-card { background-color: #0f172a; border-right: 4px solid #f59e0b; padding: 12px; border-radius: 8px; margin-bottom: 10px; }
+        .result-card .brand-code { display: flex; justify-content: space-between; margin-bottom: 8px; }
+        .result-card .brand { color: #94a3b8; font-size: 12px; background: #1e293b; padding: 2px 8px; border-radius: 10px; }
+        .result-card .code { color: #f59e0b; font-weight: bold; font-size: 16px; }
+        .result-card .desc { color: #e2e8f0; font-weight: bold; font-size: 14px; margin-bottom: 8px; border-bottom: 1px dashed #334155; padding-bottom: 5px;}
+        .result-card .sol-title { color: #10b981; font-size: 12px; margin-bottom: 3px;}
+        .result-card .sol { color: #cbd5e1; font-size: 13px; line-height: 1.4; }
+        
+        .quick-codes { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; justify-content: center; }
+        .quick-codes button { padding: 6px 12px; background-color: #334155; color: white; border: none; border-radius: 15px; cursor: pointer; font-size: 12px; }
     </style>
 </head>
 <body>
 
     <div class="header">
         <h1>CoolAssist</h1>
-        <p>مساعدك الذكي في صيانة التكييف والتبريد</p>
+        <p style="color:#94a3b8; margin:0; font-size:14px;">الدليل الفني الشامل</p>
     </div>
 
     <!-- قسم الذكاء الاصطناعي -->
     <div class="card">
-        <h2>🤖 اسأل الذكاء الاصطناعي</h2>
-        <textarea id="question" placeholder="اكتب كود العطل أو اشرح المشكلة..."></textarea>
+        <h2>🤖 مساعدة الذكاء الاصطناعي</h2>
+        <textarea id="question" placeholder="اكتب المشكلة..."></textarea>
         <button class="btn-main" onclick="openAI()">اسأل عبر Gemini</button>
     </div>
 
-    <!-- قسم أكواد الأعطال -->
-    <div class="card">
-        <h2>🔍 بحث سريع في أكواد الأعطال</h2>
-        <input type="text" id="errorCodeInput" class="code-input" placeholder="اكتب الكود هنا (مثال: E5)">
+    <!-- قسم قاعدة البيانات -->
+    <div class="card" style="flex: 1;">
+        <h2>🔍 دليل أكواد الأعطال</h2>
+        <input type="text" id="errorCodeInput" class="code-input" placeholder="اكتب الكود (مثال: E5)">
         
-        <div id="resultsContainer">
-            <!-- النتائج ستظهر هنا ديناميكياً -->
+        <div id="resultsContainer" style="max-height: 400px; overflow-y: auto;">
+            <!-- النتائج ستظهر هنا -->
         </div>
         
         <div class="quick-codes">
-            <button onclick="showCode('E5')">E5</button>
             <button onclick="showCode('CH 01')">CH 01</button>
+            <button onclick="showCode('E5')">E5</button>
             <button onclick="showCode('P4')">P4</button>
+            <button onclick="showCode('HP')">HP</button>
         </div>
     </div>
 
     <script>
-        // متغير لحفظ قاعدة البيانات بعد تحميلها
         let allCodes = [];
 
-        // 1. تحميل قاعدة البيانات من ملف codes.json عند فتح التطبيق
+        // تحميل البيانات
         fetch('codes.json')
             .then(response => response.json())
             .then(data => {
-                allCodes = data; // حفظ البيانات
-                console.log("تم تحميل قاعدة البيانات بنجاح: " + allCodes.length + " كود.");
+                allCodes = data;
             })
-            .catch(error => console.error('خطأ في تحميل قاعدة البيانات:', error));
+            .catch(error => console.error('خطأ:', error));
 
-        // 2. دالة البحث
+        // البحث
         const codeInput = document.getElementById('errorCodeInput');
         codeInput.addEventListener('input', function() {
             const val = this.value.trim().toUpperCase();
             const resultsContainer = document.getElementById('resultsContainer');
-            resultsContainer.innerHTML = ''; // مسح النتائج القديمة
+            resultsContainer.innerHTML = ''; 
 
-            if (val.length < 1) return; // لا تبحث إذا كان الحقل فارغاً
+            if (val.length < 1) return;
 
-            // البحث في قاعدة البيانات (يدعم البحث الجزئي)
-            const matches = allCodes.filter(item => item.code.toUpperCase().includes(val));
+            // البحث في الكود أو الماركة أو الوصف
+            const matches = allCodes.filter(item => 
+                item.code.toUpperCase().includes(val) || 
+                item.brand.toUpperCase().includes(val) ||
+                item.description.includes(val)
+            );
 
             if (matches.length > 0) {
                 matches.forEach(match => {
-                    // إنشاء بطاقة لكل نتيجة
                     const card = document.createElement('div');
-                    card.className = 'code-result-card';
-                    card.style.display = 'block';
+                    card.className = 'result-card';
                     card.innerHTML = `
-                        <h3>كود: ${match.code} (${match.brand})</h3>
-                        <p>${match.description}</p>
+                        <div class="brand-code">
+                            <span class="brand">${match.brand}</span>
+                            <span class="code">${match.code}</span>
+                        </div>
+                        <div class="desc">${match.description}</div>
+                        <div class="sol-title">🛠️ خطوات الحل المقترحة:</div>
+                        <div class="sol">${match.solution}</div>
                     `;
                     resultsContainer.appendChild(card);
                 });
             } else {
-                resultsContainer.innerHTML = '<p style="text-align:center; color:#94a3b8; font-size:14px;">لم يتم العثور على الكود في قاعدة البيانات المحلية. جرب البحث في الذكاء الاصطناعي.</p>';
+                resultsContainer.innerHTML = '<p style="text-align:center; color:#94a3b8; font-size:13px; padding:10px;">لم يتم العثور على الكود محلياً. استخدم الذكاء الاصطناعي بالأعلى.</p>';
             }
         });
 
-        // 3. دالة الأزرار السريعة
         function showCode(code) {
             codeInput.value = code;
             const event = new Event('input');
             codeInput.dispatchEvent(event);
         }
 
-        // 4. دالة الذكاء الاصطناعي
         function openAI() {
-            const q = document.getElementById('question').value.trim();
-            if (q !== "") {
+            const q = document.getElementById('userQuestion') ? document.getElementById('userQuestion').value : document.getElementById('question').value;
+            if (q.trim() !== "") {
                 window.open(`https://gemini.google.com/app?q=${encodeURIComponent(q)}`, '_blank');
             } else {
                 window.open("https://gemini.google.com", '_blank');
