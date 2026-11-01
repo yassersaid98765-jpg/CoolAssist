@@ -1,0 +1,82 @@
+[
+  {
+    "brand": "عام (Generic)",
+    "code": "E1",
+    "description": "عطل في حساس الحرارة الداخلي (Room Temp Sensor). تأكد من توصيل السلك أو استبدل الحساس."
+  },
+  {
+    "brand": "عام (Generic)",
+    "code": "E5",
+    "description": "عطل في كارت الإنفرتر (IPM Module). يرجى فحص مكثفات الكارت أو تغييره."
+  },
+  {
+    "brand": "Gree / TCL",
+    "code": "F1",
+    "description": "عطل في حساس حرارة المبخر (Evaporator Sensor)."
+  },
+  {
+    "brand": "Gree / TCL",
+    "code": "H6",
+    "description": "عطل في تشغيل الموتور الداخلي (Indoor Fan Motor). تأكد من الفيش أو استبدال الموتور."
+  },
+  {
+    "brand": "LG",
+    "code": "CH 01",
+    "description": "عطل في حساس حرارة الغرفة (Room Thermistor)."
+  },
+  {
+    "brand": "LG",
+    "code": "CH 05",
+    "description": "عطل في مروحة الوحدة الداخلية (Indoor Fan Motor)."
+  },
+  {
+    "brand": "Samsung",
+    "code": "E1",
+    "description": "عطل في حساس حرارة الغرفة (Room Sensor)."
+  },
+  {
+    "brand": "Samsung",
+    "code": "E4",
+    "description": "عطل في حساس حرارة الأنابيب (Pipe Sensor)."
+  },
+  {
+    "brand": "Daikin",
+    "code": "A1",
+    "description": "عطل في لوحة الدائرة الكهربائية الداخلية (Indoor PCB)."
+  },
+  {
+    "brand": "Daikin",
+    "code": "U0",
+    "description": "نقص في غاز الفريون (Refrigerant shortage)."
+  },
+  {
+    "brand": "Carrier / Midea",
+    "code": "P4",
+    "description": "عطل في حماية الضاغط (Compressor protection) أو حساس الأنابيب."
+  },
+  {
+    "brand": "Carrier / Midea",
+    "code": "P1",
+    "description": "عطل في دورة التبريد (Refrigerant system abnormality)."
+  },
+  {
+    "brand": "شلر / تكييف مركزي",
+    "code": "HP",
+    "description": "ارتفاع ضغط الغاز (High Pressure). تأكد من نظافة المكثف الخارجي."
+  },
+  {
+    "brand": "شلر / تكييف مركزي",
+    "code": "LP",
+    "description": "انخفاض ضغط الغاز (Low Pressure). قد يكون هناك تسريب فريون."
+  },
+  {
+    "brand": "إنفرتر (عام)",
+    "code": "L3",
+    "description": "ارتفاع في تيار الكهرباء أو حرارة كارت الإنفرتر."
+  },
+  {
+    "brand": "إنفرتر (عام)",
+    "code": "F3",
+    "description": "عطل في مروحة الوحدة الخارجية. تأكد من عدم وجود عائق، أو فحص المكثف (Capacitor)."
+  }
+]
