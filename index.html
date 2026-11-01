@@ -19,9 +19,10 @@
         
         /* تصميم أكواد الأعطال */
         .code-input { width: 100%; padding: 12px; background-color: #0f172a; border: 1px solid #334155; border-radius: 10px; color: white; font-size: 16px; box-sizing: border-box; margin-bottom: 10px; text-align: center; text-transform: uppercase; font-weight: bold; }
-        .code-result { background-color: #0f172a; border-right: 4px solid #f59e0b; padding: 15px; border-radius: 8px; display: none; }
-        .code-result h3 { margin: 0 0 10px 0; color: #f59e0b; }
-        .code-result p { margin: 0; color: #cbd5e1; line-height: 1.5; font-size: 14px; }
+        .code-result-card { background-color: #0f172a; border-right: 4px solid #f59e0b; padding: 15px; border-radius: 8px; margin-bottom: 10px; display: none; }
+        .code-result-card h3 { margin: 0 0 5px 0; color: #f59e0b; font-size: 16px; }
+        .code-result-card p { margin: 0; color: #cbd5e1; line-height: 1.5; font-size: 14px; }
+        
         .quick-codes { display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap; justify-content: center; }
         .quick-codes button { padding: 8px 15px; background-color: #334155; color: white; border: none; border-radius: 20px; cursor: pointer; font-weight: bold; }
         .quick-codes button:hover { background-color: var(--primary); color: #0f172a; }
@@ -37,52 +38,65 @@
     <!-- قسم الذكاء الاصطناعي -->
     <div class="card">
         <h2>🤖 اسأل الذكاء الاصطناعي</h2>
-        <textarea id="question" placeholder="اكتب كود العطل (مثل E5) أو اشرح المشكلة..."></textarea>
+        <textarea id="question" placeholder="اكتب كود العطل أو اشرح المشكلة..."></textarea>
         <button class="btn-main" onclick="openAI()">اسأل عبر Gemini</button>
     </div>
 
-    <!-- قسم أكواد الأعطال (يعمل بدون إنترنت) -->
+    <!-- قسم أكواد الأعطال -->
     <div class="card">
         <h2>🔍 بحث سريع في أكواد الأعطال</h2>
         <input type="text" id="errorCodeInput" class="code-input" placeholder="اكتب الكود هنا (مثال: E5)">
-        <div id="errorResult" class="code-result">
-            <h3 id="resCode"></h3>
-            <p id="resDesc"></p>
+        
+        <div id="resultsContainer">
+            <!-- النتائج ستظهر هنا ديناميكياً -->
         </div>
         
-        <!-- أزرار سريعة -->
         <div class="quick-codes">
-            <button onclick="showCode('E1')">E1</button>
             <button onclick="showCode('E5')">E5</button>
-            <button onclick="showCode('F3')">F3</button>
-            <button onclick="showCode('H6')">H6</button>
+            <button onclick="showCode('CH 01')">CH 01</button>
+            <button onclick="showCode('P4')">P4</button>
         </div>
     </div>
 
     <script>
-        // 1. قاعدة بيانات أكواد الأعطال (يمكنك إضافة المزيد هنا)
-        const errorDatabase = {
-            "E1": "عطل في حساس الحرارة الداخلي (Room Temp Sensor). تأكد من توصيل السلك أو استبدل الحساس.",
-            "E5": "عطل في كارت الإنفرتر (IPM Module). يرجى فحص مكثفات الكارت أو تغييره.",
-            "F3": "عطل في مروحة الوحدة الخارجية. تأكد من عدم وجود عائق، أو فحص المكثف (Capacitor).",
-            "H6": "عطل في تشغيل الموتور الداخلي (Indoor Fan Motor). تأكد من الفيش أو استبدال الموتور.",
-            "P4": "عطل في حساس حرارة الأنسياب (Pipe Temp)."
-        };
+        // متغير لحفظ قاعدة البيانات بعد تحميلها
+        let allCodes = [];
 
-        // 2. دالة البحث عن الكود
+        // 1. تحميل قاعدة البيانات من ملف codes.json عند فتح التطبيق
+        fetch('codes.json')
+            .then(response => response.json())
+            .then(data => {
+                allCodes = data; // حفظ البيانات
+                console.log("تم تحميل قاعدة البيانات بنجاح: " + allCodes.length + " كود.");
+            })
+            .catch(error => console.error('خطأ في تحميل قاعدة البيانات:', error));
+
+        // 2. دالة البحث
         const codeInput = document.getElementById('errorCodeInput');
         codeInput.addEventListener('input', function() {
             const val = this.value.trim().toUpperCase();
-            const resultBox = document.getElementById('errorResult');
-            const resCode = document.getElementById('resCode');
-            const resDesc = document.getElementById('resDesc');
+            const resultsContainer = document.getElementById('resultsContainer');
+            resultsContainer.innerHTML = ''; // مسح النتائج القديمة
 
-            if (errorDatabase[val]) {
-                resultBox.style.display = 'block';
-                resCode.innerText = "كود: " + val;
-                resDesc.innerText = errorDatabase[val];
+            if (val.length < 1) return; // لا تبحث إذا كان الحقل فارغاً
+
+            // البحث في قاعدة البيانات (يدعم البحث الجزئي)
+            const matches = allCodes.filter(item => item.code.toUpperCase().includes(val));
+
+            if (matches.length > 0) {
+                matches.forEach(match => {
+                    // إنشاء بطاقة لكل نتيجة
+                    const card = document.createElement('div');
+                    card.className = 'code-result-card';
+                    card.style.display = 'block';
+                    card.innerHTML = `
+                        <h3>كود: ${match.code} (${match.brand})</h3>
+                        <p>${match.description}</p>
+                    `;
+                    resultsContainer.appendChild(card);
+                });
             } else {
-                resultBox.style.display = 'none';
+                resultsContainer.innerHTML = '<p style="text-align:center; color:#94a3b8; font-size:14px;">لم يتم العثور على الكود في قاعدة البيانات المحلية. جرب البحث في الذكاء الاصطناعي.</p>';
             }
         });
 
