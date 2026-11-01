@@ -1,82 +1,92 @@
 [
   {
-    "brand": "عام (Generic)",
-    "code": "E1",
-    "description": "عطل في حساس الحرارة الداخلي (Room Temp Sensor). تأكد من توصيل السلك أو استبدل الحساس."
-  },
-  {
-    "brand": "عام (Generic)",
-    "code": "E5",
-    "description": "عطل في كارت الإنفرتر (IPM Module). يرجى فحص مكثفات الكارت أو تغييره."
-  },
-  {
-    "brand": "Gree / TCL",
-    "code": "F1",
-    "description": "عطل في حساس حرارة المبخر (Evaporator Sensor)."
-  },
-  {
-    "brand": "Gree / TCL",
-    "code": "H6",
-    "description": "عطل في تشغيل الموتور الداخلي (Indoor Fan Motor). تأكد من الفيش أو استبدال الموتور."
-  },
-  {
     "brand": "LG",
     "code": "CH 01",
-    "description": "عطل في حساس حرارة الغرفة (Room Thermistor)."
+    "description": "عطل في حساس حرارة الغرفة (Room Thermistor).",
+    "solution": "افحص توصيلات الحساس. قم بقياس المقاومة (يجب أن تتغير بتغير الحرارة). استبدل الحساس إذا كان مفتوحاً."
   },
   {
     "brand": "LG",
     "code": "CH 05",
-    "description": "عطل في مروحة الوحدة الداخلية (Indoor Fan Motor)."
+    "description": "عطل في مروحة الوحدة الداخلية (Indoor Fan Motor).",
+    "solution": "تأكد من عدم وجود عائق للمروحة. افحص مكثف الموتور (Capacitor). افحص خرج الكهرباء من البوردة للموتور."
   },
   {
     "brand": "Samsung",
     "code": "E1",
-    "description": "عطل في حساس حرارة الغرفة (Room Sensor)."
+    "description": "عطل في حساس حرارة الغرفة.",
+    "solution": "افحص فيش الحساس على البوردة الداخلية. قم بتغيير الحساس إذا كان تالفاً."
   },
   {
     "brand": "Samsung",
     "code": "E4",
-    "description": "عطل في حساس حرارة الأنابيب (Pipe Sensor)."
+    "description": "عطل في حساس حرارة الأنابيب (Pipe Sensor).",
+    "solution": "افحص فيش الحساس. تأكد من تثبيت الحساس جيداً على أنبوب النحاس. استبدله إذا لزم الأمر."
   },
   {
-    "brand": "Daikin",
-    "code": "A1",
-    "description": "عطل في لوحة الدائرة الكهربائية الداخلية (Indoor PCB)."
+    "brand": "Gree",
+    "code": "H6",
+    "description": "عطل في تشغيل الموتور الداخلي (No feedback from indoor fan).",
+    "solution": "افحص فيش الموتور. افحص مكثف الموتور. تأكد من أن المروحة تدور بحرية بدون احتكاك."
+  },
+  {
+    "brand": "Gree",
+    "code": "E5",
+    "description": "عطل في كارت الإنفرتر (IPM Module protection) في الوحدة الخارجية.",
+    "solution": "افحص مكثفات كارت الإنفرتر. افحص ترانزستورات (IGBT). تأكد من التبريد الجيد للكارت."
   },
   {
     "brand": "Daikin",
     "code": "U0",
-    "description": "نقص في غاز الفريون (Refrigerant shortage)."
+    "description": "نقص في غاز الفريون (Refrigerant shortage).",
+    "solution": "افحص ضغط الغاز. ابحث عن أي تسريب في المواسير أو اللحامات. قم بضبط الشحن بعد إصلاح التسريب."
   },
   {
-    "brand": "Carrier / Midea",
+    "brand": "Daikin",
+    "code": "A1",
+    "description": "عطل في لوحة الدائرة الكهربائية الداخلية (Indoor PCB).",
+    "solution": "افحص فيوز البوردة. تأكد من وجود جهد 5V و 12V. إذا لم يظهر أي قصر، قد تحتاج البوردة للاستبدال."
+  },
+  {
+    "brand": "Carrier",
     "code": "P4",
-    "description": "عطل في حماية الضاغط (Compressor protection) أو حساس الأنابيب."
+    "description": "عطل في حماية الضاغط (Compressor protection) أو حساس الأنابيب.",
+    "solution": "افحص تيار الضاغط (قد يكون مرتفعاً). افحص مكثف الضاغط الخارجي. تأكد من نظافة المكثف الخارجي."
   },
   {
-    "brand": "Carrier / Midea",
-    "code": "P1",
-    "description": "عطل في دورة التبريد (Refrigerant system abnormality)."
+    "brand": "Carrier",
+    "code": "E2",
+    "description": "عطل في حساس المبخر أو حماية التجميد.",
+    "solution": "افحص فلتر الهواء (قد يكون مسدوداً). افحص سرعة المروحة الداخلية. افحص حساس المبخر."
   },
   {
-    "brand": "شلر / تكييف مركزي",
+    "brand": "Midea / Unionaire",
+    "code": "E1",
+    "description": "عطل في حساس حرارة الغرفة أو انقطاع الاتصال بين الوحدات.",
+    "solution": "افحص سلك الاتصال بين الوحدة الداخلية والخارجية. افحص حساس الغرفة."
+  },
+  {
+    "brand": "Midea / Unionaire",
+    "code": "E3",
+    "description": "عطل في مروحة الوحدة الخارجية.",
+    "solution": "افحص مكثف المروحة. تأكد من عدم وجود أعشاش طيور أو أوساخ تعيق المروحة."
+  },
+  {
+    "brand": "شلر (Chiller)",
     "code": "HP",
-    "description": "ارتفاع ضغط الغاز (High Pressure). تأكد من نظافة المكثف الخارجي."
+    "description": "ارتفاع ضغط الغاز (High Pressure).",
+    "solution": "تأكد من نظافة مبادل الحرارة (المكثف). افحص مراوح برج التبريد. تأكد من عدم وجود غاز غير مكثف (Non-condensables)."
   },
   {
-    "brand": "شلر / تكييف مركزي",
+    "brand": "شلر (Chiller)",
     "code": "LP",
-    "description": "انخفاض ضغط الغاز (Low Pressure). قد يكون هناك تسريب فريون."
+    "description": "انخفاض ضغط الغاز (Low Pressure).",
+    "solution": "افحص تسريب الفريون. تأكد من عدم انسداد فلتر التجفيف (Drier)."
   },
   {
-    "brand": "إنفرتر (عام)",
-    "code": "L3",
-    "description": "ارتفاع في تيار الكهرباء أو حرارة كارت الإنفرتر."
-  },
-  {
-    "brand": "إنفرتر (عام)",
-    "code": "F3",
-    "description": "عطل في مروحة الوحدة الخارجية. تأكد من عدم وجود عائق، أو فحص المكثف (Capacitor)."
+    "brand": "ثلاجات (General)",
+    "code": "E1",
+    "description": "عطل في حساس الثلاجة (NTC Sensor).",
+    "solution": "افحص فيش الحساس. قم بتغيير الحساس إذا كانت قراءته غير منطقية."
   }
 ]
